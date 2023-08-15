@@ -18,12 +18,12 @@ jobs:
           path: "."
           plan_mode: deploy
           tf_version: latest
-          tf_vars_file: common.auto.tfvars
-          tf_key: monkeyGPT
+          tf_vars_file: privategpt-prod.tfvars
+          tf_key: privateGPTprod
           enable_TFSEC: false
           az_resource_group: Terraform-GitHub-Backend
           az_storage_acc: tfgithubbackendsa
-          az_container_name: gh-terraform-monkeygpt
+          az_container_name: gh-terraform-privategpt-demo
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -42,10 +42,10 @@ jobs:
         with:
           plan_mode: deploy
           tf_version: latest
-          tf_key: monkeyGPT
+          tf_key: privateGPTprod
           az_resource_group: Terraform-GitHub-Backend
           az_storage_acc: tfgithubbackendsa
-          az_container_name: gh-terraform-monkeygpt
+          az_container_name: gh-terraform-privategpt-demo
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
