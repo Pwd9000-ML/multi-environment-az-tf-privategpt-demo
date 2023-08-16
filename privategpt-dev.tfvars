@@ -129,4 +129,4 @@ ca_container_config = {
 key_vault_access_permission = ["Key Vault Secrets User"]
 
 ### CDN - Front Door ###
-create_front_door_cdn   = false
+create_front_door_cdn = false
