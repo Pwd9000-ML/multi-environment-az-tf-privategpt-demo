@@ -332,6 +332,7 @@ variable "dns_resource_group_name" {
   description = "The name of the resource group to create the DNS zone in / or where the existing zone is hosted."
   type        = string
   nullable    = false
+  default     = "dns-rg"
 }
 
 variable "custom_domain_config" {
