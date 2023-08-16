@@ -1,0 +1,52 @@
+name: "Deploy_PrivateGPT_Solution_Production"
+on:
+  workflow_dispatch:
+
+jobs:
+  ##### PLAN A DESTROY (PROD) #####
+    Plan_Production_Destroy:
+      runs-on: ubuntu-latest
+      if: ${{ github.actor != 'dependabot[bot]' }}
+      environment: null        
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3.5.3
+  
+        - name: Terraform Plan Production
+          uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
+          with:
+            path: "."
+            plan_mode: destroy
+            tf_version: latest
+            tf_vars_file: privategpt-prod.tfvars
+            tf_key: privateGPTprod
+            enable_TFSEC: false
+            az_resource_group: Terraform-GitHub-Backend
+            az_storage_acc: tfgithubbackendsa
+            az_container_name: gh-terraform-privategpt-demo
+            arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+            arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+            arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+  
+  ##### APPLY A DESTROY PLAN (PROD) #####
+    Deploy_Production:
+      needs: Plan_Production_Destroy
+      runs-on: ubuntu-latest
+      environment: production 
+      steps:
+        - name: Terraform Apply Production
+          if: ${{ github.actor != 'dependabot[bot]' }}
+          uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
+          with:
+            plan_mode: destroy
+            tf_version: latest
+            tf_key: privateGPTprod
+            az_resource_group: Terraform-GitHub-Backend
+            az_storage_acc: tfgithubbackendsa
+            az_container_name: gh-terraform-privategpt-demo
+            arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+            arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+            arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}

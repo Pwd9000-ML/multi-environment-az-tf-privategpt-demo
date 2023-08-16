@@ -11,7 +11,5 @@ updates:
   - package-ecosystem: "terraform" 
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "05:00"
+      interval: "monthly"
       timezone: "Europe/London"
