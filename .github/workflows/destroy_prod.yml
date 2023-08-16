@@ -1,4 +1,4 @@
-name: "Deploy_PrivateGPT_Solution_Production"
+name: "Destroy_PrivateGPT_Production"
 on:
   workflow_dispatch:
 

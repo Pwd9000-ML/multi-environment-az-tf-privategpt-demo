@@ -1,4 +1,4 @@
-name: "Deploy_PrivateGPT_all_enviroments"
+name: "Deploy_PrivateGPT_environments"
 on:
   workflow_dispatch:
 
