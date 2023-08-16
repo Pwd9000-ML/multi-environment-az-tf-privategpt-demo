@@ -71,7 +71,7 @@ model_deployment = [
 ### log analytics workspace for container apps ###
 laws_name              = "gptlawsprod1020"
 laws_sku               = "PerGB2018"
-laws_retention_in_days = 10
+laws_retention_in_days = 30
 
 ### Container App Enviornment ###
 cae_name = "gptcaeprod1020"
