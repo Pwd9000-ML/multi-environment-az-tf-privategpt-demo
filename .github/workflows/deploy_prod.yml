@@ -21,7 +21,7 @@ jobs:
           path: "."
           plan_mode: deploy
           tf_version: latest
-          tf_vars_file: privategpt-prod.auto.tfvars
+          tf_vars_file: privategpt-prod.tfvars
           tf_key: privateGPTprod
           enable_TFSEC: true
           az_resource_group: Terraform-GitHub-Backend
