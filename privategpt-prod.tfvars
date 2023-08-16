@@ -34,14 +34,14 @@ openai_identity = {
 ### Create Model deployment ###
 create_model_deployment = true
 model_deployment = [
-   {
-     deployment_id  = "gpt35turbo16k"
-     model_name     = "gpt-35-turbo-16k"
-     model_format   = "OpenAI"
-     model_version  = "0613"
-     scale_type     = "Standard"
-     scale_capacity = 16
-   }#,
+  {
+    deployment_id  = "gpt35turbo16k"
+    model_name     = "gpt-35-turbo-16k"
+    model_format   = "OpenAI"
+    model_version  = "0613"
+    scale_type     = "Standard"
+    scale_capacity = 16
+  } #,
   # {
   #   deployment_id  = "gpt35turbo"
   #   model_name     = "gpt-35-turbo"
@@ -95,7 +95,7 @@ ca_ingress = {
 ca_container_config = {
   name         = "gpt-chatbot-ui"
   image        = "ghcr.io/pwd9000-ml/chatbot-ui:main"
-  cpu          = 1 #2
+  cpu          = 1     #2
   memory       = "2Gi" #"4Gi"
   min_replicas = 0
   max_replicas = 5
@@ -116,10 +116,10 @@ ca_container_config = {
     },
     {
       name  = "AZURE_DEPLOYMENT_ID" #see model_deployment variable (deployment_id)
-      value = "gpt35turbo16k" #"gpt432k"
+      value = "gpt35turbo16k"       #"gpt432k"
     },
     {
-      name  = "DEFAULT_MODEL" #see model_deployment variable (model_name)
+      name  = "DEFAULT_MODEL"    #see model_deployment variable (model_name)
       value = "gpt-35-turbo-16k" #"gpt-4-32k"
     }
   ]
