@@ -1,4 +1,4 @@
-name: "Deploy_PrivateGPT_environments"
+name: "Deploy_PrivateGPT_Prod"
 on:
   workflow_dispatch:
 
@@ -6,8 +6,7 @@ jobs:
 ##### PLAN A DEPLOYMENT (PROD) #####
   Plan_Production:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
-    environment: null        
+    if: ${{ github.actor != 'dependabot[bot]' }}   
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.3
@@ -20,7 +19,7 @@ jobs:
           tf_version: latest
           tf_vars_file: privategpt-prod.tfvars
           tf_key: privateGPTprod
-          enable_TFSEC: false
+          enable_TFSEC: true
           az_resource_group: Terraform-GitHub-Backend
           az_storage_acc: tfgithubbackendsa
           az_container_name: gh-terraform-privategpt-demo

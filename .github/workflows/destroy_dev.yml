@@ -1,24 +1,24 @@
-name: "Destroy_PrivateGPT_Prod"
+name: "Destroy_PrivateGPT_Dev"
 on:
   workflow_dispatch:
 
 jobs:
-  ##### PLAN A DESTROY (PROD) #####
-    Plan_Production_Destroy:
+  ##### PLAN A DESTROY (DEV) #####
+    Plan_Development_Destroy:
       runs-on: ubuntu-latest
-      if: ${{ github.actor != 'dependabot[bot]' }}   
+      if: ${{ github.actor != 'dependabot[bot]' }}      
       steps:
         - name: Checkout
           uses: actions/checkout@v3.5.3
   
-        - name: Terraform Plan Production Destroy
+        - name: Terraform Plan Development Destroy
           uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
           with:
             path: "."
             plan_mode: destroy
             tf_version: latest
-            tf_vars_file: privategpt-prod.tfvars
-            tf_key: privateGPTprod
+            tf_vars_file: privategpt-dev.tfvars
+            tf_key: privateGPTdev
             enable_TFSEC: false
             az_resource_group: Terraform-GitHub-Backend
             az_storage_acc: tfgithubbackendsa
@@ -29,19 +29,19 @@ jobs:
             arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
             github_token: ${{ secrets.GITHUB_TOKEN }}
   
-  ##### APPLY A DESTROY PLAN (PROD) #####
-    Destroy_Production:
-      needs: Plan_Production_Destroy
+  ##### APPLY A DESTROY PLAN (DEV) #####
+    Destroy_Development:
+      needs: Plan_Development_Destroy
       runs-on: ubuntu-latest
-      environment: production 
+      environment: development
       steps:
-        - name: Terraform Apply Production Destroy
+        - name: Terraform Apply Development Destroy
           if: ${{ github.actor != 'dependabot[bot]' }}
           uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
           with:
             plan_mode: destroy
             tf_version: latest
-            tf_key: privateGPTprod
+            tf_key: privateGPTdev
             az_resource_group: Terraform-GitHub-Backend
             az_storage_acc: tfgithubbackendsa
             az_container_name: gh-terraform-privategpt-demo

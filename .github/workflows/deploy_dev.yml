@@ -1,0 +1,51 @@
+name: "Deploy_PrivateGPT_Dev"
+on:
+  workflow_dispatch:
+
+jobs:
+##### PLAN A DEPLOYMENT (DEV) #####
+  Plan_Development:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.3
+
+      - name: Terraform Plan Development
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
+        with:
+          path: "."
+          plan_mode: deploy
+          tf_version: latest
+          tf_vars_file: privategpt-dev.tfvars
+          tf_key: privateGPTdev
+          enable_TFSEC: false
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-privategpt-demo
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+##### APPLY A DEPLOYMENT PLAN (DEV) #####
+  Deploy_Development:
+    needs: Plan_Development
+    runs-on: ubuntu-latest
+    environment: development 
+    steps:
+      - name: Terraform Apply Development
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
+        with:
+          plan_mode: deploy
+          tf_version: latest
+          tf_key: privateGPTdev
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-privategpt-demo
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
