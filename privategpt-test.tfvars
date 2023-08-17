@@ -57,7 +57,7 @@ model_deployment = [
   #   model_version  = "0613"
   #   scale_type     = "Standard"
   #   scale_capacity = 16
-  # },
+  # }
   {
     deployment_id  = "gpt432k"
     model_name     = "gpt-4-32k"
