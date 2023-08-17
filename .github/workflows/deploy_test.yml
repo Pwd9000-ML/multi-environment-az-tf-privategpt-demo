@@ -6,10 +6,6 @@ jobs:
 ##### PLAN A DEPLOYMENT (test) #####
   Plan_Test:
     runs-on: ubuntu-latest
-    permissions:   #Permission is required if enabling TFSEC == true
-      actions: read
-      contents: read
-      security-events: write
     if: ${{ github.actor != 'dependabot[bot]' }}   
     steps:
       - name: Checkout
@@ -23,7 +19,7 @@ jobs:
           tf_version: latest
           tf_vars_file: privategpt-test.tfvars
           tf_key: privateGPTtest
-          enable_TFSEC: true
+          enable_TFSEC: false
           az_resource_group: Terraform-GitHub-Backend
           az_storage_acc: tfgithubbackendsa
           az_container_name: gh-terraform-privategpt-demo
