@@ -37,7 +37,7 @@ jobs:
   Deploy_Test:
     needs: Plan_Test
     runs-on: ubuntu-latest
-    environment: Test 
+    environment: test
     steps:
       - name: Terraform Apply Test
         if: ${{ github.actor != 'dependabot[bot]' }}
