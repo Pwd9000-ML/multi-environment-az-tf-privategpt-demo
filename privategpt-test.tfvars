@@ -119,7 +119,7 @@ ca_container_config = {
       value = "gpt432k"
     },
     {
-      name  = "DEFAULT_MODEL"    #see model_deployment variable (model_name)
+      name  = "DEFAULT_MODEL" #see model_deployment variable (model_name)
       value = "gpt-4-32k"
     }
   ]
