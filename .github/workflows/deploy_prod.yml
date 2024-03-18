@@ -13,7 +13,7 @@ jobs:
     if: ${{ github.actor != 'dependabot[bot]' }}   
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.2
 
       - name: Terraform Plan Production
         uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
