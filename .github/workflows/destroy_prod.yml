@@ -37,7 +37,7 @@ jobs:
       steps:
         - name: Terraform Apply Production Destroy
           if: ${{ github.actor != 'dependabot[bot]' }}
-          uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
+          uses: Pwd9000-ML/terraform-azurerm-apply@v1.3.0
           with:
             plan_mode: destroy
             tf_version: latest
