@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4.1.6
 
       - name: Terraform Plan Production
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.3.0
         with:
           path: "."
           plan_mode: deploy
