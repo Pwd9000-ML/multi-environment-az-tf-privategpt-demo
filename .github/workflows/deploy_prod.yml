@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Terraform Apply Production
         if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.3.0
         with:
           plan_mode: deploy
           tf_version: latest
